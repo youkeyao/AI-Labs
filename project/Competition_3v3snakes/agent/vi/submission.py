@@ -34,10 +34,11 @@ class SnakeMDP:
                 self.states.add((i, j))
                 self.reward[(i,j)] = 0
         self.gamma = gamma
+        head = obs[obs['controlled_snake_index']][0]
         
         # Bean reward
         for cor in obs[1]:
-            self.reward[tuple(cor)] = 10
+            self.reward[tuple(cor)] = BEAN
         # snake collision reward
         for i in range(2, 8):
             for cor in obs[i]:
@@ -47,7 +48,7 @@ class SnakeMDP:
                         pos = Action.go(tuple(cor), ac, obs['board_height'], obs['board_width'])
                         if self.reward[pos] >= 0:
                             self.reward[pos] = HEAD
-        self.reward[tuple(obs[obs['controlled_snake_index']][0])] = 0
+        self.reward[tuple(head)] = 0
 
         self.transitions = {}
         for s in self.states:
