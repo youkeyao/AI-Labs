@@ -1,4 +1,4 @@
-DEPTH = 3
+DEPTH = 2
 
 # Action
 class Action:

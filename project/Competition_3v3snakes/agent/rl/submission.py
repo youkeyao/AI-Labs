@@ -130,7 +130,7 @@ class RLAgent(object):
         self.actor = Actor(obs_dim, act_dim, num_agent, self.output_activation).to(self.device)
 
     def choose_action(self, obs):
-        obs = torch.Tensor([obs]).to(self.device)
+        obs = torch.Tensor(np.array([obs])).to(self.device)
         logits = self.actor(obs).cpu().detach().numpy()[0]
         return logits
 
